@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<properties>
+		<property name="dialect" value="mysql" />
+	</properties>
+	
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+	</settings>  
+	
+	<!-- <typeAliases>
+		<typeAlias alias="Customer" type="com.vanvalt.web.command.entity.CustomerEntity" />
+	</typeAliases> -->
+	
+	<!-- <plugins>
+		<plugin	interceptor="com.vanvalt.util.mybatis.dialect.PaginationInterceptor"/>
+	</plugins> -->
+	
+	<mappers>
+		<mapper resource="com/vanvalt/entity/mapper/AdminMapper.xml" /> 
+		<mapper resource="com/vanvalt/entity/mapper/AlarmInfoMapper.xml" />
+		<mapper resource="com/vanvalt/entity/mapper/ColumnMapper.xml" />
+		<mapper resource="com/vanvalt/entity/mapper/AppMapper.xml" />
+		<mapper resource="com/vanvalt/entity/mapper/ProductMapper.xml" />
+		<mapper resource="com/vanvalt/entity/mapper/ProductCategoryMapper.xml" />
+		<mapper resource="com/vanvalt/entity/mapper/FeedbookMapper.xml" />
+		<mapper resource="com/vanvalt/entity/mapper/TemplateMapper.xml" />
+		<mapper resource="com/vanvalt/entity/mapper/ThemeMapper.xml" />
+		<mapper resource="com/vanvalt/entity/mapper/PushMappingMapper.xml" />
+	</mappers>
+
+</configuration> 

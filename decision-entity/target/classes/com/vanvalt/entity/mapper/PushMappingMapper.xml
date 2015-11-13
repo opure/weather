@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vanvalt.entity.PushMapping" >
+  <!-- <cache type="org.mybatis.caches.memcached.MemcachedCache" /> -->
+  <resultMap id="BaseResultMap" type="com.vanvalt.entity.PushMapping" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="bd_user_id" property="bdUserId" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, user_id, bd_user_id, channel_id, device_type, create_time, update_time
+  </sql>
+  
+  <select id="load" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from push_mapping
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from push_mapping
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteBatch" parameterType="map">
+    delete from push_mapping
+    where id in
+    <foreach collection="array" item= "item" index ="index"
+            open= "(" close =")" separator=",">
+            #{item}
+    </foreach >
+  </delete>  
+  
+  <insert id="add" parameterType="com.vanvalt.entity.PushMapping" >
+    insert into push_mapping
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="bdUserId != null" >
+        bd_user_id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdUserId != null" >
+        #{bdUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.vanvalt.entity.PushMapping" >
+    update push_mapping
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdUserId != null" >
+        bd_user_id = #{bdUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateBatch" parameterType="map">
+    update push_mapping
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdUserId != null" >
+        bd_user_id = #{bdUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id in
+    <foreach collection="array" item= "item" index ="index"
+            open= "(" close =")" separator=",">
+            #{item}
+    </foreach >
+  </update>
+  
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from push_mapping
+    <where>
+      <if test="userId != null and userId != ''" >
+        and user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="bdUserId != null and bdUserId != ''" >
+        and bd_user_id = #{bdUserId,jdbcType=VARCHAR}
+      </if>
+      <if test="channelId != null and channelId != ''" >
+        and channel_id = #{channelId,jdbcType=VARCHAR}
+      </if>
+      <if test="deviceType != null and deviceType != ''" >
+        and device_type = #{deviceType,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by update_time desc, id desc	
+  </select>
+  
+  <select id="findCount" parameterType="map" resultType="java.lang.Integer"  >
+   	select count(*)
+    from push_mapping
+    <where>
+      <if test="userId != null and userId != ''" >
+        and user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="bdUserId != null and bdUserId != ''" >
+        and bd_user_id = #{bdUserId,jdbcType=VARCHAR}
+      </if>
+      <if test="channelId != null and channelId != ''" >
+        and channel_id = #{channelId,jdbcType=VARCHAR}
+      </if>
+      <if test="deviceType != null and deviceType != ''" >
+        and device_type = #{deviceType,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+</mapper>

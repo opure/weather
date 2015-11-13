@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vanvalt.entity.App" >
+  <!-- <cache type="org.mybatis.caches.memcached.MemcachedCache" /> -->
+  <resultMap id="BaseResultMap" type="com.vanvalt.entity.App" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="screen" property="screen" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="iosother" property="iosOther" jdbcType="VARCHAR" />
+    <result column="androidother" property="androidOther" jdbcType="VARCHAR" />
+    <result column="templateid" property="templateId" jdbcType="INTEGER" />
+    <result column="themeid" property="themeId" jdbcType="INTEGER" />
+    <result column="addtime" property="addTime" jdbcType="INTEGER" />
+    <result column="adminid" property="adminId" jdbcType="INTEGER" />
+    <result column="packagename" property="packageName" jdbcType="VARCHAR" />
+    <result column="emergency" property="emergency" jdbcType="VARCHAR" />
+    <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+    <result column="versionurl" property="versionUrl" jdbcType="VARCHAR" />
+    <result column="versiondescription" property="versionDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, title, tel, email, website, description, icon, screen, version, iosother, androidother, templateid, themeid, addtime, adminid,
+    packagename, emergency, copyright, versionurl, versiondescription
+  </sql>
+  
+  <select id="load" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from App
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from App
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteBatch" parameterType="map">
+    delete from App
+    where id in
+    <foreach collection="array" item= "item" index ="index"
+            open= "(" close =")" separator=",">
+            #{item}
+    </foreach >
+  </delete>  
+  
+  <insert id="add" parameterType="com.vanvalt.entity.Admin" >
+    insert into App
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="website != null" >
+        website,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="screen != null" >
+        screen,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="iosOther != null" >
+        iosother,
+      </if>
+      <if test="androidOther != null" >
+        androidother,
+      </if>
+      <if test="templateId != null" >
+        templateid,
+      </if>
+      <if test="themeId != null" >
+        themeid,
+      </if>
+      <if test="addTime != null" >
+        addtime,
+      </if>
+      <if test="adminId != null" >
+        adminid,
+      </if>
+      <if test="packageName != null" >
+        packagename,
+      </if>
+      <if test="emergency != null" >
+        emergency,
+      </if>
+      <if test="copyright != null" >
+        copyright,
+      </if>
+      <if test="versionUrl != null" >
+        versionurl,
+      </if>
+      <if test="versionDescription != null" >
+        versiondescription,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="screen != null" >
+        #{screen,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="iosOther != null" >
+        #{iosOther,jdbcType=VARCHAR},
+      </if>
+      <if test="androidOther != null" >
+        #{androidOther,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null" >
+        #{themeId,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null" >
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="emergency != null" >
+        #{emergency,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="versionUrl != null" >
+        #{versionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="versionDescription != null" >
+        #{versionDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.vanvalt.entity.Admin" >
+    update App
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="screen != null" >
+        screen = #{screen,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="iosOther != null" >
+        iosother = #{iosOther,jdbcType=VARCHAR},
+      </if>
+      <if test="androidOther != null" >
+        androidother = #{androidOther,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        templateid = #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null" >
+        themeid = #{themeId,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        addtime = #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        adminid = #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null" >
+        packagename = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="emergency != null" >
+        emergency = #{emergency,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        copyright = #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="versionUrl != null" >
+        versionurl = #{versionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="versionDescription != null" >
+        versiondescription = #{versionDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateBatch" parameterType="map">
+    update App
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="screen != null" >
+        screen = #{screen,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="iosOther != null" >
+        iosother = #{iosOther,jdbcType=VARCHAR},
+      </if>
+      <if test="androidOther != null" >
+        androidother = #{androidOther,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        templateid = #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null" >
+        themeid = #{themeId,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        addtime = #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        adminid = #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null" >
+        packagename = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="emergency != null" >
+        emergency = #{emergency,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        copyright = #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="versionUrl != null" >
+        versionurl = #{versionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="versionDescription != null" >
+        versiondescription = #{versionDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id in
+    <foreach collection="array" item= "item" index ="index"
+            open= "(" close =")" separator=",">
+            #{item}
+    </foreach >
+  </update>
+  
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from App
+    <where>
+      <if test="id != null and id != ''" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="title != null and title != ''" >
+        and title = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="tel != null and tel != ''" >
+        and tel = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null and email != ''" >
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="website != null and website != ''" >
+        and website = #{website,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null and description != ''" >
+        and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="icon != null and icon != ''" >
+        and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+      <if test="screen != null and screen != ''" >
+        and screen = #{screen,jdbcType=VARCHAR}
+      </if>
+      <if test="version != null and version != ''" >
+        and version = #{version,jdbcType=VARCHAR}
+      </if>
+      <if test="iosOther != null and iosOther != ''" >
+        and iosother = #{iosOther,jdbcType=VARCHAR}
+      </if>
+      <if test="androidOther != null and androidOther != ''" >
+        and androidother = #{androidOther,jdbcType=VARCHAR}
+      </if>
+      <if test="templateId != null and templateId != ''" >
+        and templateid = #{templateId,jdbcType=VARCHAR}
+      </if>
+      <if test="themeId != null and themeId != ''" >
+        and themeid = #{themeId,jdbcType=VARCHAR}
+      </if>
+      <if test="addTime != null and addTime != ''" >
+        and addtime = #{addTime,jdbcType=VARCHAR}
+      </if>
+      <if test="adminId != null and adminId != ''" >
+        and adminid = #{adminId,jdbcType=VARCHAR}
+      </if>
+      <if test="packageName != null and packageName != ''" >
+        and packagename = #{packageName,jdbcType=VARCHAR}
+      </if>
+      <if test="emergency != null and emergency != ''" >
+        and emergency = #{emergency,jdbcType=VARCHAR}
+      </if>
+      <if test="copyright != null and copyright != ''" >
+        and copyright = #{copyright,jdbcType=VARCHAR}
+      </if>
+      <if test="versionUrl != null and versionUrl != ''" >
+        and versionurl = #{versionUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="versionDescription != null and versionDescription != ''" >
+        and versiondescription = #{versionDescription,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by addtime desc, id desc	
+  </select>
+  
+  <select id="findCount" parameterType="map" resultType="java.lang.Integer"  >
+   	select count(id)
+    from App
+    <where>
+      <if test="id != null and id != ''" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="title != null and title != ''" >
+        and title = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="tel != null and tel != ''" >
+        and tel = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null and email != ''" >
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="website != null and website != ''" >
+        and website = #{website,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null and description != ''" >
+        and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="icon != null and icon != ''" >
+        and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+      <if test="screen != null and screen != ''" >
+        and screen = #{screen,jdbcType=VARCHAR}
+      </if>
+      <if test="version != null and version != ''" >
+        and version = #{version,jdbcType=VARCHAR}
+      </if>
+      <if test="iosOther != null and iosOther != ''" >
+        and iosother = #{iosOther,jdbcType=VARCHAR}
+      </if>
+      <if test="androidOther != null and androidOther != ''" >
+        and androidother = #{androidOther,jdbcType=VARCHAR}
+      </if>
+      <if test="templateId != null and templateId != ''" >
+        and templateid = #{templateId,jdbcType=VARCHAR}
+      </if>
+      <if test="themeId != null and themeId != ''" >
+        and themeid = #{themeId,jdbcType=VARCHAR}
+      </if>
+      <if test="addTime != null and addTime != ''" >
+        and addtime = #{addTime,jdbcType=VARCHAR}
+      </if>
+      <if test="adminId != null and adminId != ''" >
+        and adminid = #{adminId,jdbcType=VARCHAR}
+      </if>
+      <if test="packageName != null and packageName != ''" >
+        and packagename = #{packageName,jdbcType=VARCHAR}
+      </if>
+      <if test="emergency != null and emergency != ''" >
+        and emergency = #{emergency,jdbcType=VARCHAR}
+      </if>
+      <if test="copyright != null and copyright != ''" >
+        and copyright = #{copyright,jdbcType=VARCHAR}
+      </if>
+      <if test="versionUrl != null and versionUrl != ''" >
+        and versionurl = #{versionUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="versionDescription != null and versionDescription != ''" >
+        and versiondescription = #{versionDescription,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+</mapper>

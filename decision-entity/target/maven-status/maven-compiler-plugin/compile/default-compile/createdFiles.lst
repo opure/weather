@@ -1,0 +1,11 @@
+com\vanvalt\entity\Template.class
+com\vanvalt\entity\ProductCategory.class
+com\vanvalt\entity\Admin.class
+com\vanvalt\entity\Theme.class
+com\vanvalt\entity\Token.class
+com\vanvalt\entity\PushMapping.class
+com\vanvalt\entity\App.class
+com\vanvalt\entity\Product.class
+com\vanvalt\entity\Column.class
+com\vanvalt\entity\AlarmInfo.class
+com\vanvalt\entity\Feedbook.class

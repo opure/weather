@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vanvalt.entity.Product" >
+  <!-- <cache type="org.mybatis.caches.memcached.MemcachedCache" /> -->
+  <resultMap id="BaseResultMap" type="com.vanvalt.entity.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sourcefile" property="sourceFile" jdbcType="VARCHAR" />
+    <result column="desfile" property="desFile" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="ispush" property="isPush" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="constatus" property="conStatus" jdbcType="INTEGER" />
+    <result column="categoryid" property="categoryId" jdbcType="INTEGER" />
+    <result column="public_time" property="publicTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, sourcefile, desfile, title, ispush, create_time, constatus, categoryid, public_time
+  </sql>
+  
+  <select id="load" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from Product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteBatch" parameterType="map">
+    delete from Product
+    where id in
+    <foreach collection="array" item= "item" index ="index"
+            open= "(" close =")" separator=",">
+            #{item}
+    </foreach >
+  </delete>  
+  
+  <insert id="add" parameterType="com.vanvalt.entity.Product" >
+    insert into Product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sourceFile != null" >
+        sourcefile,
+      </if>
+      <if test="desFile != null" >
+        desfile,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="isPush != null" >
+        ispush,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="conStatus != null" >
+        constatus,
+      </if>
+      <if test="categoryId != null" >
+        categoryid,
+      </if>
+      <if test="publicTime != null" >
+        public_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sourceFile != null" >
+        #{sourceFile,jdbcType=VARCHAR},
+      </if>
+      <if test="desFile != null" >
+        #{desFile,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="isPush != null" >
+        #{isPush,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conStatus != null" >
+        #{conStatus,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="publicTime != null" >
+        #{publicTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.vanvalt.entity.Product" >
+    update Product
+    <set >
+      <if test="sourceFile != null" >
+        sourcefile = #{sourceFile,jdbcType=VARCHAR},
+      </if>
+      <if test="desFile != null" >
+        desfile = #{desFile,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="isPush != null" >
+        ispush = #{isPush,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conStatus != null" >
+        constatus = #{conStatus,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        categoryid = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="publicTime != null" >
+        public_time = #{publicTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateBatch" parameterType="map">
+    update Product
+    <set >
+      <if test="sourceFile != null" >
+        sourcefile = #{sourceFile,jdbcType=VARCHAR},
+      </if>
+      <if test="desFile != null" >
+        desfile = #{desFile,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="isPush != null" >
+        ispush = #{isPush,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conStatus != null" >
+        constatus = #{conStatus,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        categoryid = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="publicTime != null" >
+        public_time = #{publicTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id in
+    <foreach collection="array" item= "item" index ="index"
+            open= "(" close =")" separator=",">
+            #{item}
+    </foreach >
+  </update>
+  
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Product
+    <where>
+      <if test="id != null and id != ''" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="conStatus != null and conStatus != ''" >
+        and constatus = #{conStatus,jdbcType=INTEGER}
+      </if>
+      <if test="categoryId != null and categoryId != ''" >
+        and categoryid = #{categoryId,jdbcType=INTEGER}
+      </if>
+      <if test="isPush != null and isPush != ''" >
+        and ispush = #{isPush,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by id desc	
+  </select>
+  
+  <select id="findCount" parameterType="map" resultType="java.lang.Integer"  >
+   	select count(id)
+    from Product
+    <where>
+      <if test="id != null and id != ''" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="conStatus != null and conStatus != ''" >
+        and constatus = #{conStatus,jdbcType=INTEGER}
+      </if>
+      <if test="categoryId != null and categoryId != ''" >
+        and categoryid = #{categoryId,jdbcType=INTEGER}
+      </if>
+      <if test="isPush != null and isPush != ''" >
+        and ispush = #{isPush,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  
+</mapper>

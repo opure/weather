@@ -1,0 +1,86 @@
+package com.baidu.yun.channel.constants;
+
+public class BaiduChannelConstants {
+    // ---- will be delete
+	public static final String METHOD = "method";
+	public static final String USER_ID = "user_id"; 
+	public static final String USER_TYPE = "user_type";
+	public static final String NAME = "name";
+		
+	// ---------------- channel_id ----------------------------------
+	public static final String CHANNEL_ID = "channel_id";
+    // ---------------- batch channels for 'pushBatchUnMsg' 
+	// and 'addDevicesToTag'---------- ------------------------------
+	public static final String CHANNEL_IDS = "channel_ids";
+
+	public static final String DEVICE_TYPE = "device_type";
+    // ---------------- msg pushing type ----------------------------
+	public static final String PUSH_TYPE = "type";
+    // ---------------- only for IOS --------------------------------
+	public static final String DEPLOY_STATUS = "deploy_status";
+    // ---------------- v1.0 , v2.0(no need) ------------------------
+	// public static final String NAME = "name";
+	//----------------- tag info ------------------------------------
+	public static final String TAG_NAME = "tag";
+
+	public static final String TAG_INFO = "info";
+    //----------------- timer task ----------------------------------
+	public static final String TIMER_ID = "timer_id";
+    //----------------- topic for get the number of reached msg -----
+	public static final String TOPIC_ID = "topic_id";
+           //------ search range ---------------------------
+	       //----- for index in [START, START+LIMIT] ------
+	public static final String START = "start";
+	
+	public static final String LIMIT = "limit";
+           //----- for time in [RANGE_START, RANGE_END] ------
+	public static final String RANGE_START = "range_start";
+
+	public static final String RANGE_END = "range_end";
+    //-----------------  msg info -----------------------------------
+	public static final String MESSAGE = "msg";
+	
+    public static final String MSG_ID = "msg_id";
+
+	public static final String MESSAGE_TYPE = "msg_type";
+	
+	public static final String MSG_KEY = "msg_key";
+	
+	public static final String SEND_TIME = "send_time";
+	
+	public static final String MSG_EXPIRES = "msg_expires";
+	
+	public static final String MESSAGES = "messages";
+	
+	public static final String MSG_KEYS = "msg_keys";
+	//------------------- msg_type=0 (MSG) --------------------------
+	public static final String DESCRIPTION = "description";
+	//------------------- REST API common arguements ----------------
+	public static final String RELEASE_CERT = "release_cert";
+	
+	public static final String DEV_CERT = "dev_cert";
+	
+	public static final String TIMESTAMP = "timestamp";
+	
+	public static final String EXPIRES = "expires";
+	
+	public static final String VERSION = "v";
+	//------------------ http method and class -----------------------
+	public static final String HTTPMETHOD = "POST"; //"POST" default, "GET" for choose 
+	public static final String HTTPCLASSPUSH = "push"; // http class type
+	public static final String HTTPCLASSREPORT = "report";
+	public static final String HTTPCLASSAPP = "app";
+	public static final String HTTPCLASSTAG = "tag";
+	public static final String HTTPCLASSTIMER = "timer"; 
+	//------------------ host name -----------------------------------
+	public static final String OLD_CHANNEL_REST_URL = "channel.api.duapp.com";
+	public static final String CHANNEL_REST_URL = "api.tuisong.baidu.com";
+	//------------------ http request error, operation type ----------
+	public static final int ERROROPTTYPE = 0; // 0 -- throws exception, error code and msg by SDK, 
+	                                          // developer handel it;
+											  // 1 -- no exception will be throwed, SDK will handel it 
+											  // by itself, printing 'error_code' and 'error_msg' for developer.
+	//-------------------- v.1 used , v.2 no need --------------------
+	// public static final String CHANNEL_DEFAULT_RESOURCE_ID = "channel";
+	
+}
