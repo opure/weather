@@ -153,4 +153,27 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return remoteAddr != null ? remoteAddr : request.getRemoteAddr();
 	}
 	
+	/**
+	 * 格式化"20151107162719" 为 "2015-11-07 16:27:19"
+	 * @param str
+	 * @return
+	 */
+	public static String formateDateStr(String str){
+		
+		String dateStr = "";
+		String line = "-";
+		String colon = ":";
+		String blank = " ";
+		
+		if(str != null && str.length() >= 14){
+			
+			dateStr = dateStr.concat(str.substring(0, 4)).concat(line).concat(str.substring(4, 6))
+					.concat(line).concat(str.substring(6, 8)).concat(blank)
+					.concat(str.substring(8, 10)).concat(colon)
+					.concat(str.substring(10, 12)).concat(colon).concat(str.substring(12, 14));
+		}
+		
+		return dateStr;
+	}
+	
 }

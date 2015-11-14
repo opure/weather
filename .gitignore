@@ -1,6 +1,4 @@
 .settings/
-WebContent/Uploads/
-WebContent/WEB-INF/classes/
 
 decision-util/target/
 decision-admin/target/

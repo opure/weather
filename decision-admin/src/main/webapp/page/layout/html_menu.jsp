@@ -10,7 +10,7 @@
                 <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/document.png" alt="" />栏目管理</span>
             </li>
             <li>
-                <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/cone.png" alt="" />预警管理</span>
+                <a href="<%=basePath%>alarm/list"><span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/cone.png" alt="" />预警管理</span></a>
             </li>
             <li>
                 <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/document.png" alt="" />内容管理</span>

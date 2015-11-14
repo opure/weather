@@ -29,6 +29,8 @@ public interface AlarmInfoService {
 	public List<AlarmInfo> list(Class<AlarmInfo> clz, Map<String, Object> params, RowBounds rowBounds);
 	
 	public List<AlarmInfo> list(Class<AlarmInfo> clz, Map<String, Object> params);
+	
+	public List<AlarmInfo> listByPage(Class<AlarmInfo> clz, Map<String, Object> params);
 
 	public int findCount(Class<AlarmInfo> clz, Map<String, Object> params);
 	

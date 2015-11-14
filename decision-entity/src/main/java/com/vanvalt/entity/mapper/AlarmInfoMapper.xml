@@ -26,23 +26,23 @@
   
   <sql id="Base_Column_List" >
     alertid, alertpid, province, city, stationname, stationid, signaltype, signallevel, issuetime, issuecontent, recoverychannel,
-    distinctionlevel, dstandardtune, relievetime, dffectvaluate, docietybenefit, tnumber, underwriter, change
+    distinctionlevel, dstandardtune, relievetime, dffectvaluate, docietybenefit, tnumber, `change`, underwriter
   </sql>
   
   <select id="load" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from AlarmInfo
+    from tb_alarminfo
     where alertid = #{alertid,jdbcType=VARCHAR}
   </select>
   
   <delete id="delete" parameterType="java.lang.String" >
-    delete from AlarmInfo
+    delete from tb_alarminfo
     where alertid = #{alertid,jdbcType=VARCHAR}
   </delete>
   
   <delete id="deleteBatch" parameterType="map">
-    delete from AlarmInfo
+    delete from tb_alarminfo
     where alertid in
     <foreach collection="array" item= "item" index ="index"
             open= "(" close =")" separator=",">
@@ -51,7 +51,7 @@
   </delete>  
   
   <insert id="add" parameterType="com.vanvalt.entity.AlarmInfo" >
-    insert into AlarmInfo
+    insert into tb_alarminfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="alertPid != null" >
         alertpid,
@@ -167,7 +167,7 @@
   </insert>
   
   <update id="update" parameterType="com.vanvalt.entity.AlarmInfo" >
-    update AlarmInfo
+    update tb_alarminfo
     <set >
       <if test="alertPid != null" >
         alertpid = #{alertPid,jdbcType=VARCHAR},
@@ -228,7 +228,7 @@
   </update>
   
   <update id="updateBatch" parameterType="map">
-    update AlarmInfo
+    update tb_alarminfo
     <set >
       <if test="alertPid != null" >
         alertpid = #{alertPid,jdbcType=VARCHAR},
@@ -295,7 +295,7 @@
   <select id="list" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from AlarmInfo
+    from tb_alarminfo
     <where>
       <if test="alertId != null and alertId != ''" >
         and alertid = #{alertId,jdbcType=INTEGER}
@@ -358,9 +358,76 @@
     order by alertid desc	
   </select>
   
+  <select id="listByPage" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_alarminfo
+    <where>
+      <if test="alertId != null and alertId != ''" >
+        and alertid = #{alertId,jdbcType=INTEGER}
+      </if>
+      <if test="alertPid != null and alertPid != ''" >
+        and alertpid = #{alertPid,jdbcType=VARCHAR}
+      </if>
+      <if test="province != null and province != ''" >
+        and province = #{province,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null and city != ''" >
+        and city = #{city,jdbcType=VARCHAR}
+      </if>
+      <if test="stationName != null and stationName != ''" >
+        and stationname = #{stationName,jdbcType=VARCHAR}
+      </if>
+      <if test="stationId != null and stationId != ''" >
+        and stationid = #{stationId,jdbcType=VARCHAR}
+      </if>
+      <if test="signalType != null and signalType != ''" >
+        and signaltype = #{signalType,jdbcType=VARCHAR}
+      </if>
+      <if test="signalLevel != null and signalLevel != ''" >
+        and signallevel = #{signalLevel,jdbcType=VARCHAR}
+      </if>
+      <if test="issueTime != null and issueTime != ''" >
+        and issuetime = #{issueTime,jdbcType=VARCHAR}
+      </if>
+      <if test="issueContent != null and issueContent != ''" >
+        and issuecontent = #{issueContent,jdbcType=VARCHAR}
+      </if>
+      <if test="recoveryChannel != null and recoveryChannel != ''" >
+        and recoverychannel = #{recoveryChannel,jdbcType=VARCHAR}
+      </if>
+      <if test="dStandardTune != null and dStandardTune != ''" >
+        and dstandardtune = #{dStandardTune,jdbcType=VARCHAR}
+      </if>
+      <if test="relieveTime != null and relieveTime != ''" >
+        and relievetime = #{relieveTime,jdbcType=VARCHAR}
+      </if>
+      <if test="distinctionLevel != null and distinctionLevel != ''" >
+        and distinctionlevel = #{distinctionLevel,jdbcType=VARCHAR}
+      </if>
+      <if test="dffectValuate != null and dffectValuate != ''" >
+        and dffectvaluate = #{dffectValuate,jdbcType=VARCHAR}
+      </if>
+      <if test="docietyBenefit != null and docietyBenefit != ''" >
+        and docietybenefit = #{docietyBenefit,jdbcType=VARCHAR}
+      </if>
+      <if test="tNumber != null and tNumber != ''" >
+        and tnumber = #{tNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="underwriter != null and underwriter != ''" >
+        and underwriter = #{underwriter,jdbcType=VARCHAR}
+      </if>
+      <if test="change != null and change != ''" >
+        and change = #{change,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by alertid desc	
+    limit #{startIndex},#{pageSize}
+  </select>
+  
   <select id="findCount" parameterType="map" resultType="java.lang.Integer"  >
    	select count(alertid)
-    from AlarmInfo
+    from tb_alarminfo
     <where>
       <if test="alertId != null and alertId != ''" >
         and alertid = #{alertId,jdbcType=INTEGER}
