@@ -12,7 +12,7 @@
         <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-touch-fullscreen" content="yes">      
-        <meta name="description" content="物流信息通管理后台">
+        <meta name="description" content="海南决策气象服务管理平台">
         <meta name="author" content="CHENBO.WANG QQ.178855730">
         <!-- Styles -->
         <link href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />

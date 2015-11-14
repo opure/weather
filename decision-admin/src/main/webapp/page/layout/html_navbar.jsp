@@ -26,7 +26,7 @@
 	</script>
         <div class="navbar navbar-static-top">
             <div class="navbar-inner">
-                <a class="brand" href="<%=basePath%>page/index.jsp">拇指校园</a>
+                <a class="brand" href="<%=basePath%>page/index.jsp">中国天气通</a>
                 <ul class="nav">
                     <li id="menu-icon"><a class="menu-icon" href="#"><i class="icon-reorder"></i></a></li>
                     <li class="dropdown">
@@ -36,14 +36,14 @@
                                 <div class="container-fluid">
                                     <div class="row-fluid">
                                         <div class="span4">
-                                            <img id="nav_image" class="profile" src="<%=basePath%>assets/img/bruce.jpg" alt="">
+                                            <img id="nav_image" class="profile" src="<%=basePath%>assets/img/default_user.png" alt="">
                                         </div>
                                         <div class="span8 details">
-                                            <small>欢迎光临 <a href="#"><span id="nav_name"></span></a></small>
+                                            <small>欢迎光临 <a href="#"><span id="nav_name">admin</span></a></small>
                                             <ul class="unstyled">
-                                            	<li><a href="#"><small><i class="icon-phone icon"></i> <span id="nav_phone"></span></small></a></li>
-                                                <li><a href="<%=basePath%>message/receiveMessageList"><small><i class="icon-comments icon"></i><span id="nav_unread"></span> 条未读信息</small></a></li>
-                                               <!--  <li><a href="#"><small><i class="icon-bar-chart icon"></i> 2条订单</small></a></li> -->
+                                            	<li><a href="#"><small><i class="icon-phone icon"></i> <span id="nav_phone">18501680892</span></small></a></li>
+                                                <li><a href="#"><small><i class="icon-comments icon"></i><span id="nav_unread">2</span> 条未读信息</small></a></li>
+                                                <!-- <li><a href="#"><small><i class="icon-bar-chart icon"></i> 2条订单</small></a></li> -->
                                             </ul>
                                         </div>
                                     </div>

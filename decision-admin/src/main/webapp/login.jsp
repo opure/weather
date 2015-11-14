@@ -2,28 +2,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
-        <title>后台管理系统</title>
+        <title>气象局云服务平台-中国天气通</title>
         <%@include file="/page/layout/html_header.jsp"%>
         <script type="text/javascript">
         	$(document).ready(function(){
         		
         		
         	});
-        	
-        	/**
-        	* 登录入口
-        	*/
-        	function preLogin(type){
-        		if(type == '2'){
-        			$("#roleName").html("家长");
-        		} else if(type == '1'){
-        			$("#roleName").html("老师");
-        		} else {
-        			$("#roleName").html("");
-        		}
-        		
-        		$("#type").val(type);
-        	}
         	
         	/**
         	* 用户登录
@@ -64,21 +49,10 @@
         </script>
     </head>
     <body>
-        <div class="login-page">
-            <div class="accounts">
-                <h1>海南天气管理后台</h1>
-                <div id="user" class="users">
-                    <a onclick="preLogin('2');" ><img src="assets/img/parents.png" alt="家长入口" /></a>
-                </div>
-                <div id="user2" class="users">
-                    <a onclick="preLogin('1');" ><img src="assets/img/teacher.png" alt="老师入口" /></a>
-                </div>
-                <div id="user3" class="users">
-                    <a onclick="preLogin('0');" ><img src="assets/img/school.png" alt="学校入口" /></a>
-                </div>
-            </div>
-            <div class="login">
-            	<div id="login">
+    	<div style="padding-top:50px;text-align:center;color:#fff;"><h1>海南决策气象服务管理平台</h1></div>
+        <div class="login-page" style="height:85%;">
+            <div class="login" style="display:block;">
+            	<div id="login" style="">
             	<form id="loginForm" action="/login" method="post">
 	                <h4><span id="roleName"></span>登录 <span class="pull-right users" onclick=""><i class="icon-remove-circle"></i></span></h4>
 	                <div class="control-group">
@@ -91,7 +65,7 @@
 	                            </a>
 	                        </div>
 	                        <div class="pull-right">
-	                            <a id="submit" onclick="toLogin();" class="btn blue"><!--  <a href="page/index.jsp" class="btn blue"> -->
+	                            <a href="page/index.jsp" class="btn blue">
 	                            	提交
 	                            </a>
 	                            <input type="hidden" id="type" name="type" value=""/>
@@ -112,10 +86,9 @@
 	                            
 	                        </div>
 	                        <div class="pull-right">
-	                            <a id="submit" onclick="" class="btn orange"><!--  <a href="page/index.jsp" class="btn blue"> -->
+	                            <a href="page/index.jsp" class="btn blue">
 	                            	提交
 	                            </a>
-	                            <input type="hidden" id="type" name="type" value=""/>
 	                        </div>
 	                    </div>
 	                </div>
@@ -131,19 +104,9 @@
 		        </div>
 	        </div>
         </div>
+        <div style="color: #fff;text-align:center;"><h5>版权所有 ©2013-2015 中国气象局公共气象服务中心</h5></div>
         <%@include file="/page/layout/html_footer_login.jsp"%>
-        <script>login();
-        </script>
-        <script type="text/javascript">
-        	function fpass(){
-        		$("#login").css("display", "none");
-        		$("#forget").css("display", "block");
-        	}
-        	
-        	function back(){
-        		$("#login").css("display", "block");
-        		$("#forget").css("display", "none");
-        	}
+        <script>
         </script>
     </body>
 </html>
