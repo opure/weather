@@ -105,7 +105,7 @@
         underwriter,
       </if>
       <if test="change != null" >
-        change,
+        `change`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -187,8 +187,8 @@
       <if test="signalType != null" >
         signaltype = #{signalType,jdbcType=VARCHAR},
       </if>
-      <if test="singalLevel != null" >
-        signallevel = #{singalLevel,jdbcType=VARCHAR},
+      <if test="signalLevel != null" >
+        signallevel = #{signalLevel,jdbcType=VARCHAR},
       </if>
       <if test="issueTime != null" >
         issuetime = #{issueTime,jdbcType=VARCHAR},
@@ -221,7 +221,7 @@
         underwriter = #{underwriter,jdbcType=VARCHAR},
       </if>
       <if test="change != null" >
-        change = #{change,jdbcType=INTEGER},
+        `change` = #{change,jdbcType=INTEGER},
       </if>
     </set>
     where alertid = #{alertId,jdbcType=VARCHAR}
@@ -248,8 +248,8 @@
       <if test="signalType != null" >
         signaltype = #{signalType,jdbcType=VARCHAR},
       </if>
-      <if test="singalLevel != null" >
-        signallevel = #{singalLevel,jdbcType=VARCHAR},
+      <if test="signalLevel != null" >
+        signallevel = #{signalLevel,jdbcType=VARCHAR},
       </if>
       <if test="issueTime != null" >
         issuetime = #{issueTime,jdbcType=VARCHAR},
@@ -282,7 +282,7 @@
         underwriter = #{underwriter,jdbcType=VARCHAR},
       </if>
       <if test="change != null" >
-        change = #{change,jdbcType=INTEGER},
+        `change` = #{change,jdbcType=INTEGER},
       </if>
     </set>
     where alertid in
@@ -352,7 +352,7 @@
         and underwriter = #{underwriter,jdbcType=VARCHAR}
       </if>
       <if test="change != null and change != ''" >
-        and change = #{change,jdbcType=INTEGER}
+        and `change` = #{change,jdbcType=INTEGER}
       </if>
     </where>
     order by alertid desc	
@@ -418,7 +418,7 @@
         and underwriter = #{underwriter,jdbcType=VARCHAR}
       </if>
       <if test="change != null and change != ''" >
-        and change = #{change,jdbcType=INTEGER}
+        and `change` = #{change,jdbcType=INTEGER}
       </if>
     </where>
     order by alertid desc	
@@ -484,7 +484,7 @@
         and underwriter = #{underwriter,jdbcType=VARCHAR}
       </if>
       <if test="change != null and change != ''" >
-        and change = #{change,jdbcType=INTEGER}
+        and `change` = #{change,jdbcType=INTEGER}
       </if>
     </where>
   </select>

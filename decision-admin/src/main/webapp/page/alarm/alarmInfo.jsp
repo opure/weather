@@ -94,7 +94,7 @@
 										<td><span class="label light">未成交</span></td>
 										<td><span class="label lightblue">认证</span></td> --%>
 										<td>
-											<span class="btn blue" onclick="update('1234','update.jsp?id=');">
+											<span class="btn blue" onclick="edit('${alarm.alertId}','alarm/edit?alertId=');">
 												<i class="icon-edit"></i> 修改 
 											</span>  
 											<%-- <span class="btn red">
@@ -119,6 +119,12 @@
 	<%@include file="/page/layout/html_footer_tables.jsp"%>
 	<script>
 		data_tables();
+		
+		function edit(alertid, url){
+			
+			var alertStr = encodeURI(encodeURI(alertid));
+			window.location.href = "<%=basePath%>"+url+alertStr;
+		}
 		
 		function formatDateStr(str){
 			
