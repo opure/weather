@@ -58,6 +58,15 @@ public class Constant {
 	/** 不可见 */
 	public final static String INVISIBLE								= "N";
 	
+	/** 空格*/
+	public final static String STRING_SPACE								= " ";
+	/** 横线*/
+	public final static String STRING_LINE								= "-";
+	/** 冒号*/
+	public final static String STRING_COLON								= ":";
+	/** 空白*/
+	public final static String STRING_BLANK								= "";
+	
 	// 短信息验证码校验
 	public static final Map<Integer,Object> SMS_VERIFY_CODE_STATUS_MAP = new HashMap<Integer,Object>();
 	

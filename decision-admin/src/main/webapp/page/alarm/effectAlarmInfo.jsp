@@ -43,12 +43,12 @@
                            	<li class="heading"></li>
 							<li class="active">
 								<a href="#tab" data-toggle="tab">
-									预警信息列表
+									生效中
 								</a>
 							</li>
 							<li>
-								<a href="#">
-									生效中
+								<a href="<%=basePath%>alarm/all">
+									全部预警
 								</a>
 							</li>
 						</ul> 
@@ -69,14 +69,14 @@
 							<thead>
 								<tr>
 									<th style="width:16%">AlertId</th>
-									<th style="width:6%">Province</th>
-									<th style="width:6%">City</th>
-									<th style="width:8%">预警类型</th>
-									<th style="width:8%">预警级别</th>
-									<th style="width:6%">Change</th>
-									<th style="width:14%">发布时间</th>
-									<th style="width:14%">解除时间</th>
-									<th style="width:8%">操作</th>
+									<th style="width:5%">Province</th>
+									<th style="width:5%">City</th>
+									<th style="width:7%">预警类型</th>
+									<th style="width:7%">预警级别</th>
+									<th style="width:5%">Change</th>
+									<th style="width:13%">发布时间</th>
+									<th style="width:13%">解除时间</th>
+									<th style="width:15%">操作</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -97,9 +97,9 @@
 											<span class="btn blue" onclick="edit('${alarm.alertId}','alarm/edit?alertId=');">
 												<i class="icon-edit"></i> 修改 
 											</span>  
-											<%-- <span class="btn red">
-												<i class="icon-trash"> </i>删除
-											</span> --%>
+											<span class="btn red" onclick="relieve('${alarm.alertId}');">
+												<i class="icon-trash"> </i>解除 
+											</span>
 										</td>
 									</tr>
 								</c:forEach>
@@ -120,10 +120,38 @@
 	<script>
 		data_tables();
 		
+		/**
+		* 修改
+		*/
 		function edit(alertid, url){
 			
 			var alertStr = encodeURI(encodeURI(alertid));
 			window.location.href = "<%=basePath%>"+url+alertStr;
+		}
+		
+		/**
+		* 解除
+		*/
+		function relieve(alertid){
+			
+			if(alertid != null && alertid != ""){
+				
+				$.ajax({
+					type: "POST",
+					url: "<%=basePath%>alarm/relieve",
+					data: {
+							alertId: alertid
+							},
+					dataType: "json",
+					success: function(json){
+					
+						if(json.success){
+							alert("预警解除成功！");
+							window.location.href = "<%=basePath%>alarm/index";
+						}
+					}
+				});
+			}
 		}
 		
 		function formatDateStr(str){

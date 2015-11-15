@@ -16,6 +16,8 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.vanvalt.util.constant.Constant;
+
 /**
  * 字符串工具类, 继承org.apache.commons.lang3.StringUtils类
  * @author ThinkGem
@@ -158,22 +160,39 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * @param str
 	 * @return
 	 */
-	public static String formateDateStr(String str){
+	public static String formateStr2Date(String str){
 		
 		String dateStr = "";
-		String line = "-";
-		String colon = ":";
-		String blank = " ";
 		
 		if(str != null && str.length() >= 14){
 			
-			dateStr = dateStr.concat(str.substring(0, 4)).concat(line).concat(str.substring(4, 6))
-					.concat(line).concat(str.substring(6, 8)).concat(blank)
-					.concat(str.substring(8, 10)).concat(colon)
-					.concat(str.substring(10, 12)).concat(colon).concat(str.substring(12, 14));
+			if(!str.contains(Constant.STRING_LINE)){
+				dateStr = dateStr.concat(str.substring(0, 4)).concat(Constant.STRING_LINE).concat(str.substring(4, 6))
+						.concat(Constant.STRING_LINE).concat(str.substring(6, 8)).concat(Constant.STRING_SPACE)
+						.concat(str.substring(8, 10)).concat(Constant.STRING_COLON)
+						.concat(str.substring(10, 12)).concat(Constant.STRING_COLON).concat(str.substring(12, 14));
+			} else {
+				dateStr = str;
+			}
 		}
 		
 		return dateStr;
+	}
+	
+	/**
+	 * 格式化"2015-11-07 16:27:19" 为 "20151107162719"
+	 * @param dateStr
+	 * @return
+	 */
+	public static String formatDate2Str(String dateStr){
+		
+		String str = "";
+		if(dateStr != null && !"".equals(dateStr)){
+			
+			str = dateStr.replace(Constant.STRING_LINE, Constant.STRING_BLANK).replace(Constant.STRING_SPACE, Constant.STRING_BLANK).replace(Constant.STRING_COLON, Constant.STRING_BLANK);
+		}
+		
+		return str;
 	}
 	
 }

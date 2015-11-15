@@ -3,6 +3,7 @@ package com.vanvalt.web.admin.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.vanvalt.entity.AlarmInfo;
 import com.vanvalt.service.AdminService;
 import com.vanvalt.service.AlarmInfoService;
 import com.vanvalt.util.comm.StringUtils;
+import com.vanvalt.util.date.DateUtil;
 
 /** 
  * @author xy.li@vanvalt.com 
@@ -41,20 +43,83 @@ public class AlarmInfoController extends BaseController {
 	
 	
 	/**
-	 * 预警信息列表
+	 * 生效中预警信息
 	 * @param model
 	 * @param pageNum
 	 * @param pageSize
 	 * @param httpSession
 	 * @return
 	 */
-	@RequestMapping(value="list")
-	public String list(Model model,  
+	@RequestMapping(value="index")
+	public String index(Model model,  
 			@RequestParam(required=false) Integer pageNum,   
             @RequestParam(required=false) Integer pageSize, 
             HttpSession httpSession){
 		
-		String returnUrl = "page/alarm/alarmInfo";
+		String returnUrl = "page/alarm/effectAlarmInfo";
+		
+		List<AlarmInfo> allAlarmInfoList = new ArrayList<AlarmInfo>();
+		List<AlarmInfo> alarmInfoList = new ArrayList<AlarmInfo>();
+		
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("alartId", "201511141508598560");
+		
+		List list = Lists.newArrayList();
+		
+		allAlarmInfoList = this.alarmInfoService.list(AlarmInfo.class, params);
+		
+		for(AlarmInfo ai:allAlarmInfoList){
+			
+			String issueTime = ai.getIssueTime();
+			String relieveTime = ai.getRelieveTime();
+			
+			if(issueTime != null && !"".equals(issueTime)){
+				if(relieveTime != null && !"".equals(relieveTime)){
+					
+					String issueDateStr = StringUtils.formateStr2Date(issueTime);
+					String relieveDateStr = StringUtils.formateStr2Date(relieveTime);
+					
+					Date issueDate = DateUtil.dateFormat(issueDateStr);
+					Date relieveDate = DateUtil.dateFormat(relieveDateStr);
+					//logger.info(issueTime+", "+relieveTime);
+					// 判断当前时间是否在发布时间和解除时间之间
+					if(DateUtil.nowDateBetweenStartDateAndEndDate(issueDate, relieveDate)){
+						
+						ai.setIssueTime(issueDateStr);
+						ai.setRelieveTime(relieveDateStr);
+						
+						alarmInfoList.add(ai);
+					}
+				}
+			}
+		}
+		
+		Integer totalCount = alarmInfoList.size();
+		this.initPage(params, pageNum, pageSize, totalCount);
+		
+		list = alarmInfoList;
+		this.initResult(model, list, params);
+		
+		model.addAttribute("alarmInfoList", alarmInfoList);
+		
+		return returnUrl;
+	}
+	
+	/**
+	 * 全部预警信息
+	 * @param model
+	 * @param pageNum
+	 * @param pageSize
+	 * @param httpSession
+	 * @return
+	 */
+	@RequestMapping(value="all")
+	public String all(Model model,  
+			@RequestParam(required=false) Integer pageNum,   
+            @RequestParam(required=false) Integer pageSize, 
+            HttpSession httpSession){
+		
+		String returnUrl = "page/alarm/allAlarmInfo";
 		
 		List<AlarmInfo> alarmInfoList = new ArrayList<AlarmInfo>();
 		
@@ -72,8 +137,8 @@ public class AlarmInfoController extends BaseController {
 			String issueTime = ai.getIssueTime();
 			String relieveTime = ai.getRelieveTime();
 			
-			ai.setIssueTime(StringUtils.formateDateStr(issueTime));
-			ai.setRelieveTime(StringUtils.formateDateStr(relieveTime));
+			ai.setIssueTime(StringUtils.formateStr2Date(issueTime));
+			ai.setRelieveTime(StringUtils.formateStr2Date(relieveTime));
 		}
 		
 		list = alarmInfoList;
@@ -109,8 +174,8 @@ public class AlarmInfoController extends BaseController {
 			String relieveTime = alarmInfo.getRelieveTime();
 			
 			// 格式化发布时间和解除时间
-			alarmInfo.setIssueTime(StringUtils.formateDateStr(issueTime));
-			alarmInfo.setRelieveTime(StringUtils.formateDateStr(relieveTime));
+			alarmInfo.setIssueTime(StringUtils.formateStr2Date(issueTime));
+			alarmInfo.setRelieveTime(StringUtils.formateStr2Date(relieveTime));
 		}
 		
 		model.addAttribute("alarmInfo", alarmInfo);
@@ -157,12 +222,47 @@ public class AlarmInfoController extends BaseController {
 				alarmInfo.setCity(city);
 				alarmInfo.setSignalType(signalType);
 				alarmInfo.setSignalLevel(signalLevel);
-				alarmInfo.setIssueTime(issueTime);
-				alarmInfo.setRelieveTime(relieveTime);
+				alarmInfo.setIssueTime(StringUtils.formatDate2Str(issueTime));
+				alarmInfo.setRelieveTime(StringUtils.formatDate2Str(relieveTime));
 				alarmInfo.setIssueContent(issueContent);
 				
 				this.alarmInfoService.update(alarmInfo);
 				
+				json.put("success", true);
+			}
+		}
+		
+		return json.toString();
+	}
+	
+	/**
+	 * 解除预警
+	 * @param model
+	 * @param alertId
+	 * @param httpSession
+	 * @return
+	 * @throws JSONException
+	 */
+	@ResponseBody
+	@RequestMapping(value="relieve")
+	public String relieve(Model model,  
+			@RequestParam String alertId,
+            HttpSession httpSession) throws JSONException{
+		
+		JSONObject json = new JSONObject();
+		
+		if(alertId != null && !"".equals(alertId)){
+			
+			AlarmInfo alarm = this.alarmInfoService.load(AlarmInfo.class, alertId);
+			
+			if(alarm != null){
+				
+				String nowDate = DateUtil.getStringNowTime();
+				String relieveTime = StringUtils.formatDate2Str(nowDate);
+				
+				alarm.setRelieveTime(relieveTime);
+				
+				this.alarmInfoService.update(alarm);
 				json.put("success", true);
 			}
 		}

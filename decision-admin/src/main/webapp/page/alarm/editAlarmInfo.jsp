@@ -39,8 +39,13 @@
 						<ul class="nav nav-tabs">
                            	<li class="heading"></li>
 							<li>
-								<a href="<%=basePath%>message/sentMessageMgt" >
-									预警信息列表
+								<a href="<%=basePath%>alarm/index" >
+									生效中
+								</a>
+							</li>
+							<li>
+								<a href="<%=basePath%>alarm/all" >
+									全部预警
 								</a>
 							</li>
 							<li class="active">
@@ -128,7 +133,7 @@
 									<label class="control-label">内容</label>
 									<div class="controls">
                                 		<div class="wmd-panel">
-                                    		<textarea style="margin: 0px; height: 100px;" id="content" name="content"
+                                    		<textarea style="margin: 0px; height: 100px;" name="issueContent"
                                     		 class="wmd-input span6" id="issueContent">${alarmInfo.issueContent }</textarea> 
                                 		</div>		
 									</div>
@@ -160,6 +165,9 @@
 	        //pickerPosition: "top-right"
 	    });
 	    
+	    /**
+	    * 保存预警信息
+	    */
 	    function save(){
 			
 	    	var alertId = $("#alertId").val();
@@ -169,6 +177,21 @@
 	    	var signalLevel = $("#signalLevel").val();
 	    	var issueTime = $("#issueTime").val();
 	    	var relieveTime = $("#relieveTime").val();
+	    	if(issueTime != null && issueTime != ""){
+	    		
+	    		if(relieveTime != null && relieveTime != ""){
+	    			
+	    			var issueDate=Date.parse(issueTime.replace(/-/g,"/"));
+	    			var relieveDate = Date.parse(relieveTime.replace(/-/g,"/"));
+	    			
+	    			if(issueDate > relieveDate){
+	    				alert("发布时间不得晚于解除时间！");
+	    				return false;
+	    			}
+	    		}
+	    		
+	    	}
+	    	
 	    	var issueContent = $("#issueContent").val();
 	    	
 			$.ajax({
@@ -188,7 +211,7 @@
 				success: function(json){
 				
 					if(json.success){
-						window.location.href = "<%=basePath%>alarm/list";
+						window.location.href = "<%=basePath%>alarm/all";
 					}
 				}
 			});
