@@ -114,8 +114,7 @@
 			</div>
 		</div>
 
-		<%@include file="/page/layout/html_copyright.jsp"%>
-	</div>
+	<%@include file="/page/layout/html_copyright.jsp"%>
 	<%@include file="/page/layout/html_footer_tables.jsp"%>
 	<script>
 		data_tables();

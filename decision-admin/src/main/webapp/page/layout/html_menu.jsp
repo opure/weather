@@ -7,7 +7,7 @@
                 <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/phone.png" alt="" />应用管理</span>
             </li>
             <li>
-                <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/document.png" alt="" />栏目管理</span>
+               <a href="<%=basePath%>column/allColumn"> <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/document.png" alt="" />栏目管理</span></a>
             </li>
             <li>
                 <a href="<%=basePath%>alarm/index"><span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/cone.png" alt="" />预警管理</span></a>

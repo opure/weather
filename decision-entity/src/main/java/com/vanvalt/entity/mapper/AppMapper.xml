@@ -33,17 +33,17 @@
   <select id="load" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from App
+    from tb_app
     where id = #{id,jdbcType=INTEGER}
   </select>
   
   <delete id="delete" parameterType="java.lang.String" >
-    delete from App
+    delete from tb_app
     where id = #{id,jdbcType=INTEGER}
   </delete>
   
   <delete id="deleteBatch" parameterType="map">
-    delete from App
+    delete from tb_app
     where id in
     <foreach collection="array" item= "item" index ="index"
             open= "(" close =")" separator=",">
@@ -309,7 +309,7 @@
   <select id="list" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from App
+    from tb_app
     <where>
       <if test="id != null and id != ''" >
         and id = #{id,jdbcType=INTEGER}
@@ -377,7 +377,7 @@
   
   <select id="findCount" parameterType="map" resultType="java.lang.Integer"  >
    	select count(id)
-    from App
+    from tb_app
     <where>
       <if test="id != null and id != ''" >
         and id = #{id,jdbcType=INTEGER}
