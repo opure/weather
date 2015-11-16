@@ -4,7 +4,7 @@
                 <a href="<%=basePath%>page/index.jsp"><span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/dashboard.png" alt="" />首页</span></a>
             </li>
             <li>
-                <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/phone.png" alt="" />应用管理</span>
+                <a href="<%=basePath%>app/index"><span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/phone.png" alt="" />应用管理</span></a>
             </li>
             <li>
                <a href="<%=basePath%>column/allColumn"> <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/document.png" alt="" />栏目管理</span></a>
@@ -39,7 +39,7 @@
                 </ul>
             </li>
             <li>
-                <span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/sheild.png" alt="" />安全退出</span>
+                <a href="<%=basePath%>login.jsp"><span><img class="img-icon" src="<%=basePath%>assets/img/flat_icons/sheild.png" alt="" />安全退出</span></a>
             </li>
         </ul>
     

@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background-color:#5886db;	
+}
+.loginbox{
+	font-family:"微软雅黑";
+	width:280px;
+	margin:0 auto;
+	margin-top:3%;
+	background-color:#fff;
+	border: solid 1px #f0f0f0;
+	border-radius:10px;
+	padding:40px 2% 30px 2% ;
+	box-shadow: 0 3px 6px #386796;
+	}
