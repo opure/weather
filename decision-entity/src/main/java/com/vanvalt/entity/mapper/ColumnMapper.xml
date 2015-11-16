@@ -23,28 +23,51 @@
     <result column="updatetime" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="columnstyle" property="columnStyle" jdbcType="INTEGER" />
     <result column="color" property="color" jdbcType="VARCHAR" />
+    <association property="app"  javaType="com.vanvalt.entity.App" resultMap="appBaseResultMap"></association>
+  </resultMap>
+  <resultMap id="appBaseResultMap" type="com.vanvalt.entity.App" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="screen" property="screen" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="iosother" property="iosOther" jdbcType="VARCHAR" />
+    <result column="androidother" property="androidOther" jdbcType="VARCHAR" />
+    <result column="templateid" property="templateId" jdbcType="INTEGER" />
+    <result column="themeid" property="themeId" jdbcType="INTEGER" />
+    <result column="addtime" property="addTime" jdbcType="INTEGER" />
+    <result column="adminid" property="adminId" jdbcType="INTEGER" />
+    <result column="packagename" property="packageName" jdbcType="VARCHAR" />
+    <result column="emergency" property="emergency" jdbcType="VARCHAR" />
+    <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+    <result column="versionurl" property="versionUrl" jdbcType="VARCHAR" />
+    <result column="versiondescription" property="versionDescription" jdbcType="VARCHAR" />
   </resultMap>
   
   <sql id="Base_Column_List" >
-    id, name, appid, parent_id, dataurl, type, module, orderby, addtime, edittime, adminid,
-    listdataurl, icon, firstshowlist, typeproperty, soncolumn, updatestatus, updatetime,
-    columnstyle, color
+    c.id, c.name,c.appid, c.parent_id, c.dataurl, c.type, c.module, c.orderby, c.addtime, c.edittime, c.adminid,
+    c.listdataurl, c.icon, c.firstshowlist, c.typeproperty, c.soncolumn, c.updatestatus, c.updatetime,
+    c.columnstyle, c.color
   </sql>
   
   <select id="load" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from Column
+    from tb_column
     where id = #{id,jdbcType=INTEGER}
   </select>
   
   <delete id="delete" parameterType="java.lang.String" >
-    delete from Column
+    delete from tb_column
     where id = #{id,jdbcType=INTEGER}
   </delete>
   
   <delete id="deleteBatch" parameterType="map">
-    delete from Column
+    delete from tb_column
     where id in
     <foreach collection="array" item= "item" index ="index"
             open= "(" close =")" separator=",">
@@ -308,9 +331,12 @@
   
   <select id="list" parameterType="map" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from Column
+    <include refid="Base_Column_List" />,
+    a.id, a.title, a.tel, a.email, a.website, a.description, a.icon, a.screen, a.version, a.iosother, a.androidother, a.templateid, a.themeid, a.addtime, a.adminid,
+    a.packagename, a.emergency, a.copyright, a.versionurl, a.versiondescription
+    from tb_column AS c,tb_app AS a
     <where>
+       c.appid=a.id
       <if test="id != null and id != ''" >
         and id = #{id,jdbcType=INTEGER}
       </if>
@@ -348,12 +374,11 @@
         and color = #{color,jdbcType=VARCHAR}
       </if>
     </where>
-    order by addtime desc, id desc	
   </select>
   
   <select id="findCount" parameterType="map" resultType="java.lang.Integer"  >
    	select count(id)
-    from Column
+    from tb_column
     <where>
       <if test="id != null and id != ''" >
         and id = #{id,jdbcType=INTEGER}

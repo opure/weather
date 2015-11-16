@@ -28,6 +28,8 @@ public class Column implements Serializable{
 	private int adminId;
 	private String listDataUrl;
 	private String icon;
+	//App名称
+	private App app;
 	// 首次显示列表
 	private int firstShowList;
 	private int typeProperty;
@@ -38,7 +40,7 @@ public class Column implements Serializable{
 	// 栏目停止显示更新时间
 	private Date updateTime;
 	// 栏目样式模板
-	private int columnStye;
+	private int columnStyle;
 	private String color;
 	public int getId() {
 		return id;
@@ -148,11 +150,12 @@ public class Column implements Serializable{
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	public int getColumnStye() {
-		return columnStye;
+
+	public int getColumnStyle() {
+		return columnStyle;
 	}
-	public void setColumnStye(int columnStye) {
-		this.columnStye = columnStye;
+	public void setColumnStyle(int columnStyle) {
+		this.columnStyle = columnStyle;
 	}
 	public String getColor() {
 		return color;
@@ -160,8 +163,10 @@ public class Column implements Serializable{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
-	
-	
-
+	public App getApp() {
+		return app;
+	}
+	public void setApp(App app) {
+		this.app = app;
+	}
 }

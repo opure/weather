@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 
+import com.vanvalt.entity.AlarmInfo;
 import com.vanvalt.entity.Column;
 
 /**
@@ -29,7 +30,7 @@ public interface ColumnService {
 	public List<Column> list(Class<Column> clz, Map<String, Object> params, RowBounds rowBounds);
 	
 	public List<Column> list(Class<Column> clz, Map<String, Object> params);
-
+	
 	public int findCount(Class<Column> clz, Map<String, Object> params);
 	
 }

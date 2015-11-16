@@ -32,7 +32,7 @@
         <%-- <link rel="shortcut icon" href="<%=basePath%>assets/ico/favicon.png">  --%>
         <link rel="shortcut icon" href="<%=basePath%>assets/ico/favicon.ico"> 
         <script src="<%=basePath%>assets/js/jquery-1.7.min.js" type="text/javascript"></script>	
-        <script src="<%=basePath%>assets/js/wlxxt.js" type="text/javascript"></script>
+        <script src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>	
         <script src="<%=basePath%>assets/js/FormValid.js" type="text/javascript"></script>
         <script src="<%=basePath%>assets/js/FV_onBlur.js" type="text/javascript"></script>
         <script src="<%=basePath%>assets/js/uuid.js" type="text/javascript"></script>
