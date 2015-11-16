@@ -38,6 +38,16 @@
 
 			<div class="row-fluid">
 				<div class="span12 well">
+					<div class="title">
+						<ul class="nav nav-tabs">
+                           	<li class="heading"></li>
+							<li class="active">
+								<a href="#" data-toggle="tab">
+									应用信息
+								</a>
+							</li>
+						</ul> 
+					</div>
 					<div class="well-content">
 						<table class="table table-bordered table-striped table-hover">
 							<thead>
@@ -46,29 +56,28 @@
 									<th>Icon</th>
 									<th>闪屏</th>
 									<th>版本</th>
-									<th>操作</th>
+									<th style="width:30%;">操作</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${alarmInfoList}" var="alarm" varStatus="a">
+								<c:forEach items="${appList}" var="app" varStatus="a">
 									<tr>
-										<td>${alarm.alertId}</td>
-										<td>${alarm.province }</td>
-										<td>${alarm.city }</td>
-										<td>${alarm.signalType }</td>
-										<td>${alarm.signalLevel }</td>
+										<td>${app.title}</td>
+										<td><img style="width:150px;height:150px;" src="<%=basePath%>assets/img/icon.png"></td>
+										<td><img style="width:82px;height:150px;" src="<%=basePath%>assets/img/screen.jpg"></td>
+										<td>${app.version}</td>
 										<%--<td><fmt:formatDate value="${message.createTime }" pattern="yyyy-MM-dd HH:mm"/></td>
 										<td><span class="label light">未成交</span></td>
 										<td><span class="label lightblue">认证</span></td> --%>
 										<td>
-											<span class="btn blue" onclick="edit('${alarm.alertId}','alarm/edit?alertId=');">
+											<span class="btn blue" onclick="edit('${app.id}','app/edit?id=');">
 												<i class="icon-edit"></i> 修改 
 											</span> 
-											<span class="btn blue" onclick="edit('${alarm.alertId}','alarm/edit?alertId=');">
-												<i class="icon-edit"></i> 查看 
+											<span class="btn orange" onclick="view('${app.id}','app/view?id=');">
+												<i class="icon-search"></i> 查看 
 											</span> 
-											<span class="btn blue" onclick="edit('${alarm.alertId}','alarm/edit?alertId=');">
-												<i class="icon-edit"></i> 栏目管理 
+											<span class="btn green" onclick="">
+												<i class="icon-book"></i> 栏目管理 
 											</span>  
 											<%-- <span class="btn red">
 												<i class="icon-trash"> </i>删除
@@ -79,8 +88,8 @@
 								
 							</tbody>
 						</table>
-						<form action="<%=basePath%>alarm/all" method="post" id="all"></form>
-						<page:createPager pageSize="${pageSize}" totalPage="${totalPage}" totalCount="${totalCount}" curPage="${pageNum}" formId="all"/>  
+						<form action="<%=basePath%>app/index" method="post" id="index"></form>
+						<page:createPager pageSize="${pageSize}" totalPage="${totalPage}" totalCount="${totalCount}" curPage="${pageNum}" formId="index"/>  
 						
 					</div>
 				</div>
@@ -93,28 +102,18 @@
 	<script>
 		data_tables();
 		
-		function edit(alertid, url){
+		function edit(id, url){
 			
-			var alertStr = encodeURI(encodeURI(alertid));
-			window.location.href = "<%=basePath%>"+url+alertStr;
+			//var alertStr = encodeURI(encodeURI(alertid));
+			window.location.href = "<%=basePath%>"+url+id;
 		}
 		
-		function formatDateStr(str){
+		function view(id, url){
 			
-			var dateStr = "";
-			if(str != null && str.length > 0){
-				var year = str.substring(0, 3);
-				var month = str.substring(4, 5);
-				var day = str.substring(6, 7);
-				var hour = str.substring(8, 9);
-				var miunte = str.substring(10, 11);
-				var second = str.substring(12, 13);
-				
-				dateStr = year +"-"+ month +"-"+ day +" "+ hour +":"+ miunte +":"+ second;
-			}
-			
-			return dateStr;
+			//var alertStr = encodeURI(encodeURI(alertid));
+			window.location.href = "<%=basePath%>"+url+id;
 		}
+		
 	</script>
 </body>
 </html>

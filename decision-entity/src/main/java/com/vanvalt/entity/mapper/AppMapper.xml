@@ -52,7 +52,7 @@
   </delete>  
   
   <insert id="add" parameterType="com.vanvalt.entity.Admin" >
-    insert into App
+    insert into tb_app
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="title != null" >
         title,
@@ -175,7 +175,7 @@
   </insert>
   
   <update id="update" parameterType="com.vanvalt.entity.Admin" >
-    update App
+    update tb_app
     <set >
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
@@ -239,7 +239,7 @@
   </update>
   
   <update id="updateBatch" parameterType="map">
-    update App
+    update tb_app
     <set >
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
@@ -373,6 +373,76 @@
       </if>
     </where>
     order by addtime desc, id desc	
+  </select>
+  
+  <select id="listByPage" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_app
+    <where>
+      <if test="id != null and id != ''" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="title != null and title != ''" >
+        and title = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="tel != null and tel != ''" >
+        and tel = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null and email != ''" >
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="website != null and website != ''" >
+        and website = #{website,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null and description != ''" >
+        and description = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="icon != null and icon != ''" >
+        and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+      <if test="screen != null and screen != ''" >
+        and screen = #{screen,jdbcType=VARCHAR}
+      </if>
+      <if test="version != null and version != ''" >
+        and version = #{version,jdbcType=VARCHAR}
+      </if>
+      <if test="iosOther != null and iosOther != ''" >
+        and iosother = #{iosOther,jdbcType=VARCHAR}
+      </if>
+      <if test="androidOther != null and androidOther != ''" >
+        and androidother = #{androidOther,jdbcType=VARCHAR}
+      </if>
+      <if test="templateId != null and templateId != ''" >
+        and templateid = #{templateId,jdbcType=VARCHAR}
+      </if>
+      <if test="themeId != null and themeId != ''" >
+        and themeid = #{themeId,jdbcType=VARCHAR}
+      </if>
+      <if test="addTime != null and addTime != ''" >
+        and addtime = #{addTime,jdbcType=VARCHAR}
+      </if>
+      <if test="adminId != null and adminId != ''" >
+        and adminid = #{adminId,jdbcType=VARCHAR}
+      </if>
+      <if test="packageName != null and packageName != ''" >
+        and packagename = #{packageName,jdbcType=VARCHAR}
+      </if>
+      <if test="emergency != null and emergency != ''" >
+        and emergency = #{emergency,jdbcType=VARCHAR}
+      </if>
+      <if test="copyright != null and copyright != ''" >
+        and copyright = #{copyright,jdbcType=VARCHAR}
+      </if>
+      <if test="versionUrl != null and versionUrl != ''" >
+        and versionurl = #{versionUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="versionDescription != null and versionDescription != ''" >
+        and versiondescription = #{versionDescription,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by addtime desc, id desc	
+    limit #{startIndex},#{pageSize}
   </select>
   
   <select id="findCount" parameterType="map" resultType="java.lang.Integer"  >

@@ -27,9 +27,13 @@ public interface AppDao {
 	
 	public App load(Class<App> clz,String id);
 	
+	public App load(Class<App> clz,Integer id);
+	
 	public List<App> list(Class<App> clz, Map<String, Object> params, RowBounds rowBounds);
 	
 	public List<App> list(Class<App> clz, Map<String, Object> params);
+	
+	public List<App> listByPage(Class<App> clz, Map<String, Object> params);
 
 	public int findCount(Class<App> clz, Map<String, Object> params);
 }

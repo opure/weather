@@ -62,7 +62,7 @@ public class AlarmInfoController extends BaseController {
 		List<AlarmInfo> alarmInfoList = new ArrayList<AlarmInfo>();
 		
 		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("alartId", "201511141508598560");
+		//params.put("alartId", "201511141508598560");
 		
 		List list = Lists.newArrayList();
 		
